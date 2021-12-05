@@ -16,7 +16,7 @@ function areanaSweep() {
         y++;
         player.score += rowCount * 10;
         rowCount *= 2;
-        dropInterval -= dropInterval * 10 / 100;
+        dropInterval -= dropInterval * 1 / 100;
         console.log(dropInterval);
     }
 }
