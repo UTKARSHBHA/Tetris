@@ -1,0 +1,8 @@
+foreach;
+requestAnimationFrame;
+time;
+addEventListener;
+fill();
+continue label to jump outside of nested loops;
+splice;
+unshift
