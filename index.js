@@ -16,6 +16,8 @@ function areanaSweep() {
         y++;
         player.score += rowCount * 10;
         rowCount *= 2;
+        dropInterval -= dropInterval * 10 / 100;
+        console.log(dropInterval);
     }
 }
 
@@ -133,6 +135,8 @@ function playerReset() {
     player.pos.y = 0;
     player.pos.x = (Math.floor(arena[0].length / 2)) - (Math.floor(player.matrix[0].length / 2));
     if (collide(arena, player)) {
+        player.score = 0;
+        dropInterval = 1000;
         arena.forEach(row => row.fill(0));
     }
 }
@@ -214,7 +218,6 @@ const player = {
 }
 
 document.addEventListener("keydown", event => {
-    console.log(event.key);
     if (event.key === "ArrowLeft") {
         playerMove(-1);
     }
@@ -229,6 +232,20 @@ document.addEventListener("keydown", event => {
     }
     else if (event.key === 'w') {
         playerRotate(1);
+    }
+    else if (event.key === " ") {
+        while (1) {
+            player.pos.y++;
+            if (collide(arena, player)) {
+                player.pos.y--;
+                merge(arena, player);
+                playerReset();
+                areanaSweep();
+                updateScore();
+                break;
+            }
+            dropCounter = 0;
+        }
     }
 })
 playerReset();
